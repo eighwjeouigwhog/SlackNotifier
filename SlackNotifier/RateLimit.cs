@@ -17,7 +17,10 @@ namespace Slack
         long LastFired;
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="loose">ms</param>
         public RateLimit(long loose)
         {
             Loose = loose;
