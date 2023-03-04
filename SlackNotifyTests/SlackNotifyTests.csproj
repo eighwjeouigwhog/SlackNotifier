@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SlackNotier\SlackNotifier.csproj" />
+    <ProjectReference Include="..\SlackNotifier\SlackNotifier.csproj" />
   </ItemGroup>
 
 </Project>

@@ -22,7 +22,7 @@ namespace Slack.Tests
             s.Load();
 
             var token = s.BotToken;
-            var slack = new Slack.BotNotifier(token);
+            var slack = new BotNotifier(token);
             return slack;
         }
 
@@ -30,8 +30,19 @@ namespace Slack.Tests
         public void PushTest()
         {
             var slack = GetSlack();
-            var p = new Payload() { channel="#test", username="Tester", text = "test"};
+            var p = new Payload() { channel = "#test", username = "Tester", text = "test" };
             slack.Push(p);
+        }
+
+        [TestMethod()]
+        public void PushThreadTest()
+        {
+            var slack = GetSlack();
+            var p = new Payload() { channel = "#test", username = "Tester", text = "test" };
+            var ts = slack.Push(p).ts;
+
+            var p2 = new Payload() { channel = "#test", username = "Tester", text = "test2", thread_ts = ts };
+            slack.Push(p2);
         }
     }
 }

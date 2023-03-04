@@ -15,9 +15,9 @@
     /**
 	 * 通知
 	 */
-    public interface INotify<T>
+    public interface INotify<T,S>
 	{
-        void Push(T message);
+        S Push(T message);
 	}
 }
 

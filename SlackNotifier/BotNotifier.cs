@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace Slack
 {
-    public class BotNotifier : INotify<Payload>, IDisposable
+    public class BotNotifier : INotify<Payload, Error>, IDisposable
     {
         RateLimit Limit = new RateLimit(1000);
 
@@ -41,7 +41,7 @@ namespace Slack
         /// </summary>
         /// <param name="message"></param>
         /// <exception cref="Exception"></exception>
-        public void Push(Payload message)
+        public Error Push(Payload message)
         {
             Limit.Invoke();
 
@@ -62,6 +62,7 @@ namespace Slack
             {
                 throw new Exception($"{err?.error}");
             }
+            return err;
         }
     }
 }

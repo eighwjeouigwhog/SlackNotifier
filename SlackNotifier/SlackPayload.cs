@@ -50,6 +50,7 @@
         public Attachment[] attachments;
         public Block[] blocks;
         public string mrkdwn = "true";
+        public string? thread_ts;
     }
 
     public sealed class Attachment
