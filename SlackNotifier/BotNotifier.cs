@@ -21,7 +21,6 @@ namespace Slack
         {
             Token = token;
             Client = new HttpClient();
-
         }
 
         public void Dispose()
