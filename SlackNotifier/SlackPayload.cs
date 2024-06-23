@@ -51,6 +51,7 @@
         public Block[] blocks;
         public string mrkdwn = "true";
         public string? thread_ts;
+        public bool? reply_broadcast;
     }
 
     public sealed class Attachment
