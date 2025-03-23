@@ -52,6 +52,11 @@
         public string mrkdwn = "true";
         public string? thread_ts;
         public bool? reply_broadcast;
+
+        public override string ToString()
+        {
+            return $"{username} {channel} {thread_ts} {text}";
+        }
     }
 
     public sealed class Attachment
