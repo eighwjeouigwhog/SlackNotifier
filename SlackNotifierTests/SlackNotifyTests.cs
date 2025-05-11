@@ -1,7 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
-
-namespace Slack.Tests
+﻿namespace Slack.Tests
 {
     public class LoadSetting
     {
