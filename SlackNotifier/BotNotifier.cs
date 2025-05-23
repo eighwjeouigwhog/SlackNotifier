@@ -12,10 +12,17 @@ namespace Slack
 
         HttpClient Client;
         
+
         /// <summary>
         /// Botトークン
         /// </summary>
         string Token;
+
+        /// <summary>
+        /// 動作可能フラグ
+        /// </summary>
+        public bool IsEnable { get; set; } = true;
+
 
         public BotNotifier(string token)
         {
@@ -36,32 +43,40 @@ namespace Slack
         }
 
         /// <summary>
-        /// 通知を行う
+        /// 送信
         /// </summary>
         /// <param name="message"></param>
         /// <exception cref="Exception"></exception>
         public Error Push(Payload message)
         {
-            Limit.Invoke();
-
-            var json = MakeJsonPayload(message);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var request = new HttpRequestMessage(HttpMethod.Post, "https://slack.com/api/chat.postMessage");
-            request.Content = content;
-            request.Headers.Add("Authorization", $"Bearer {Token}");
-
-            var ret = Client.SendAsync(request);
-
-            ret.Wait();
-
-            var r2 = ret.Result.Content.ReadAsStream();
-
-            Error err = JsonSerializer.Deserialize<Error>(r2);
-            if (err?.ok != true &&  err != null && err.error != "missing_post_type")
+            if (IsEnable)
             {
-                throw new Exception($"{err?.error}");
+
+                Limit.Invoke();
+
+                var json = MakeJsonPayload(message);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var request = new HttpRequestMessage(HttpMethod.Post, "https://slack.com/api/chat.postMessage");
+                request.Content = content;
+                request.Headers.Add("Authorization", $"Bearer {Token}");
+
+                var ret = Client.SendAsync(request);
+
+                ret.Wait();
+
+                var r2 = ret.Result.Content.ReadAsStream();
+
+                Error err = JsonSerializer.Deserialize<Error>(r2);
+                if (err?.ok != true && err != null && err.error != "missing_post_type")
+                {
+                    throw new Exception($"{err?.error}");
+                }
+                return err;
             }
-            return err;
+            else
+            {
+                return new Error() { ok = true };
+            }
         }
     }
 }

@@ -22,6 +22,26 @@
             var slack = new BotNotifier(token);
             return slack;
         }
+        public static BotNotifier GetInvalidSlack()
+        {
+            var slack = new BotNotifier("invalid token");
+            return slack;
+        }
+
+        [TestMethod()]
+        public void PushInvalidTest()
+        {
+            try
+            {
+                var slack = GetInvalidSlack();
+                var p = new Payload() { channel = "#test", username = "Tester", text = "test" };
+                slack.Push(p);
+            }
+            catch (Exception ex)
+            {
+                Assert.IsTrue(ex.Message.Contains("invalid_auth"));
+            }
+        }
 
         [TestMethod()]
         public void PushTest()
