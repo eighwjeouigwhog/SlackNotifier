@@ -1,6 +1,5 @@
 ﻿namespace Slack
 {
-
     public class Block
     {
         virtual public string type { get; set; }
@@ -40,6 +39,9 @@
         }
     }
 
+    /// <summary>
+    /// Slack chat.postMessage引数オブジェクト
+    /// </summary>
     public class Payload
     {
         public string channel;
@@ -85,6 +87,4 @@
         public string value;
         public string @short;
     }
-
-
 }

@@ -23,7 +23,10 @@ namespace Slack
         /// </summary>
         public bool IsEnable { get; set; } = true;
 
-
+        /// <summary>
+        /// 生成
+        /// </summary>
+        /// <param name="token">Botトークン</param>
         public BotNotifier(string token)
         {
             Token = token;
@@ -35,6 +38,12 @@ namespace Slack
             Client.Dispose();
         }
 
+        /// <summary>
+        /// JSON文字列化
+        /// </summary>
+        /// <typeparam name="T">元型</typeparam>
+        /// <param name="p">元オブジェクト</param>
+        /// <returns>JSON文字列</returns>
         protected string MakeJsonPayload<T>(T p)
         {
             var options = new JsonSerializerOptions { IncludeFields = true };
@@ -45,13 +54,12 @@ namespace Slack
         /// <summary>
         /// 送信
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">chat.postMessage引数オブジェクト</param>
         /// <exception cref="Exception"></exception>
         public Error Push(Payload message)
         {
             if (IsEnable)
             {
-
                 Limit.Invoke();
 
                 var json = MakeJsonPayload(message);
