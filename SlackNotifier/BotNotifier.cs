@@ -6,6 +6,9 @@ using System.Text.Json;
 
 namespace Slack
 {
+    /// <summary>
+    /// Bot通知
+    /// </summary>
     public class BotNotifier : INotify<Payload, Error>, IDisposable
     {
         RateLimit Limit = new RateLimit(1000);
@@ -56,6 +59,7 @@ namespace Slack
         /// </summary>
         /// <param name="message">chat.postMessage引数オブジェクト</param>
         /// <exception cref="Exception"></exception>
+        /// <returns>結果(nonnull)</returns>
         public Error Push(Payload message)
         {
             if (IsEnable)

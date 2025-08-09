@@ -12,9 +12,11 @@
         Emergency = 2
     }
 
-    /**
-	 * 通知
-	 */
+    /// <summary>
+    /// 通知インターフェース
+    /// </summary>
+    /// <typeparam name="T">メッセージ</typeparam>
+    /// <typeparam name="S">結果</typeparam>
     public interface INotify<T,S>
 	{
         S Push(T message);
