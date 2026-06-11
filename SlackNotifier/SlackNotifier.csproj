@@ -14,7 +14,8 @@
   </PropertyGroup>
 	
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>embedded</DebugType>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
     <IsTrimmable>True</IsTrimmable>
     <IsAotCompatible>False</IsAotCompatible>
   </PropertyGroup>
