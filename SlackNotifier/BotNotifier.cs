@@ -39,6 +39,7 @@ namespace Slack
         public void Dispose()
         {
             Client.Dispose();
+            Client = null;
         }
 
         /// <summary>
